@@ -40,6 +40,10 @@ class GMapsDurationProcessor(Processor):
 
     def get_gmaps_distance(self, address, dest, mode):
         """Get the distance"""
+        if not address:
+            logger.error("Failed retrieving distance to address, Addr was not parsed: %s: %s", address, 0)
+            return None
+
         # get timestamp for next monday at 9:00:00 o'clock
         now = datetime.datetime.today().replace(hour=9, minute=0, second=0)
         next_monday = now + datetime.timedelta(days=7 - now.weekday())
