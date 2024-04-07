@@ -193,6 +193,8 @@ class WgGesucht(Crawler):
         """Extract address from expose itself"""
         response = self.get_soup_from_url(url)
         address_div = response.find('div', {"class": "col-sm-4 mb10"})
+        if not address_div:
+            address_div = response.find('div', {"class": "col - xs - 12"})
         if not isinstance(address_div, Tag):
             logger.debug("No address in response for URL: %s", url)
             return None
